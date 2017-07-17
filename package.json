@@ -1,0 +1,31 @@
+{
+  "name": "Heroes",
+  "version": "0.0.1",
+  "description": "Heroes angular 1.6 app",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start",
+    "bundle": "webpack",
+    "server": "lite-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@uirouter/angularjs": "^1.0.3",
+    "angular": "^1.6.4",
+    "angular-mocks": "^1.6.4",
+    "html-loader": "^0.4.5",
+    "jasmine": "^2.6.0",
+    "jasmine-core": "^2.6.4",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-spec-reporter": "0.0.31",
+    "karma-webpack": "^2.0.3",
+    "lite-server": "^2.3.0",
+    "webpack": "^2.6.1"
+  }
+}
