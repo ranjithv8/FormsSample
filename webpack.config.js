@@ -3,7 +3,7 @@ module.exports = {
 	context: __dirname + '/src/app',
 	entry: {
 		app: './app.js',
-		vendor: ['angular','@uirouter/angularjs']
+		vendor: ['angular','@uirouter/angularjs','angular-messages']
 	},
 	output: {
 		path: __dirname + '/dist',

@@ -4,20 +4,20 @@ var loginComponent = (function(){
 		bindings:{},
 		template: require("./login.html") ,
 
-		submit: function() {
-			response = loginService.authenticate(this.username,this.password);
-			if(!response.success) {
-				this.formError = errorFactory[errorCode]
-			} else {
-				this.successMessage = true
+		controller: function(loginService,errorFactory) {
+			this.formError = null;
+			this.submit = function(data) {
+				response = loginService.authenticate(data.username,data.password);
+				if(!response.success) {
+					this.formError = errorFactory[response.errorCode]
+					this.success = false;
+				} else {
+					this.success = true;
+					this.formError = null;
+				}
+				this.submitted= true;
 			}
-		},
-
-		submitForm: function() {
-			debugger;
-			alert("Okay")
-		}
-		
+		}		
 	});
 })();
 

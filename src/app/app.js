@@ -1,9 +1,10 @@
 var angular = require('angular'),
-	routeProvider = require('@uirouter/angularjs');
+	routeProvider = require('@uirouter/angularjs'),
+	ngMessages = require('angular-messages');
 
-var app = angular.module("loginApp",['ui.router','customForms']);
+var app = angular.module("loginApp",['ui.router','customForms','ngMessages']);
 	
-angular.module("customForms",[]);
+angular.module("customForms",['ngMessages']);
 
 var forms = require("./CustomFormModule/index.js"),
 	login = require("./LoginModule/index.js");

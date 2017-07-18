@@ -1,11 +1,10 @@
 var loginFormComponent = (function(){
 	angular.module("customForms").component('loginform',{
-		bindings:{},
+		bindings:{
+			submit: '&'
+		},
 		template: require("./loginForm.html"),
-		onSubmit: function() {
-			debugger;
-			alert("Okay")
-		}
+		controller: function() {}
 	});
 })();
 

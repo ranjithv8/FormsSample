@@ -1,3 +1,4 @@
-<div>LoginApp</div>
-<div>{{$ctrl.formError}}</div>
-<loginform></loginform>
+<h2>LoginApp</h2>
+<div class = "form-error" ng-if="!$ctrl.success && $ctrl.submitted">{{$ctrl.formError}}</div>
+<div class = "form-success" ng-if="$ctrl.success">Login Success</div>
+<loginform submit = '$ctrl.submit(data)'></loginform>

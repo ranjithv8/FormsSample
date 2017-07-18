@@ -1,47 +1,46 @@
 webpackJsonp([0],{
 
-/***/ 59:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(92);
-
-
-
-
-/***/ }),
-
 /***/ 60:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(93);
+__webpack_require__(94);
+
+
+
 
 /***/ }),
 
-/***/ 90:
-/***/ (function(module, exports) {
+/***/ 61:
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "<form name=thenga ng-submit=$ctrl.onSubmit()> <div> <label>Username</label> <input type=text /> </div> <div> <label>Password</label> <input type=password /> </div> <div> <button type=submit>Submit</button> </div> <form></form></form>";
-
-/***/ }),
-
-/***/ 91:
-/***/ (function(module, exports) {
-
-module.exports = "<div>LoginApp</div> <div>{{$ctrl.formError}}</div> <loginform></loginform>";
+__webpack_require__(95);
 
 /***/ }),
 
 /***/ 92:
+/***/ (function(module, exports) {
+
+module.exports = "<form name=loginForm ng-submit=$ctrl.submit({data:$ctrl.formData}) novalidate> <div> <label>Username</label> <input type=text name=username ng-model=$ctrl.formData.username min-length=4 ng-pattern=/^[a-z]+[0-9a-z_]*$/ required/> <div ng-messages=loginForm.username.$error ng-if=loginForm.username.$dirty> <div ng-message=required class=form-field-error>Please enter the username</div> <div ng-message=pattern class=form-field-error>Please enter valid username</div> </div> </div> <div> <label>Password</label> <input type=password name=password ng-model=$ctrl.formData.password required/> <div ng-messages=loginForm.password.$error ng-if=loginForm.password.$dirty> <div ng-message=required class=form-field-error>Please enter the password</div> </div> </div> <div> <input type=submit ng-disabled=!loginForm.$valid /> </div> <div>{{ loginForm.$valid | json}}</div> <form></form></form>";
+
+/***/ }),
+
+/***/ 93:
+/***/ (function(module, exports) {
+
+module.exports = "<h2>LoginApp</h2> <div class=form-error ng-if=\"!$ctrl.success && $ctrl.submitted\">{{$ctrl.formError}}</div> <div class=form-success ng-if=$ctrl.success>Login Success</div> <loginform submit=$ctrl.submit(data)></loginform> ";
+
+/***/ }),
+
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
 var loginFormComponent = (function(){
 	angular.module("customForms").component('loginform',{
-		bindings:{},
-		template: __webpack_require__(90),
-		onSubmit: function() {
-			debugger;
-			alert("Okay")
-		}
+		bindings:{
+			submit: '&'
+		},
+		template: __webpack_require__(92),
+		controller: function() {}
 	});
 })();
 
@@ -49,40 +48,40 @@ module.exports = loginFormComponent;
 
 /***/ }),
 
-/***/ 93:
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 var loginComponent = (function(){
 	angular.module("loginApp").component('login',{
 		bindings:{},
-		template: __webpack_require__(91) ,
+		template: __webpack_require__(93) ,
 
-		submit: function() {
-			response = loginService.authenticate(this.username,this.password);
-			if(!response.success) {
-				this.formError = errorFactory[errorCode]
-			} else {
-				this.successMessage = true
+		controller: function(loginService,errorFactory) {
+			this.formError = null;
+			this.submit = function(data) {
+				response = loginService.authenticate(data.username,data.password);
+				if(!response.success) {
+					this.formError = errorFactory[response.errorCode]
+					this.success = false;
+				} else {
+					this.success = true;
+					this.formError = null;
+				}
+				this.submitted= true;
 			}
-		},
-
-		submitForm: function() {
-			debugger;
-			alert("Okay")
-		}
-		
+		}		
 	});
 })();
 
-__webpack_require__(94);
-__webpack_require__(95)
+__webpack_require__(96);
+__webpack_require__(97)
 
 module.exports = loginComponent;
 
 /***/ }),
 
-/***/ 94:
+/***/ 96:
 /***/ (function(module, exports) {
 
 var loginService = (function(){
@@ -118,7 +117,7 @@ var loginService = (function(){
 
 /***/ }),
 
-/***/ 95:
+/***/ 97:
 /***/ (function(module, exports) {
 
 var errorFactory = (function(){
@@ -133,18 +132,19 @@ var errorFactory = (function(){
 
 /***/ }),
 
-/***/ 96:
+/***/ 98:
 /***/ (function(module, exports, __webpack_require__) {
 
 var angular = __webpack_require__(11),
-	routeProvider = __webpack_require__(23);
+	routeProvider = __webpack_require__(23),
+	ngMessages = __webpack_require__(24);
 
-var app = angular.module("loginApp",['ui.router','customForms']);
+var app = angular.module("loginApp",['ui.router','customForms','ngMessages']);
 	
-angular.module("customForms",[]);
+angular.module("customForms",['ngMessages']);
 
-var forms = __webpack_require__(59),
-	login = __webpack_require__(60);
+var forms = __webpack_require__(60),
+	login = __webpack_require__(61);
 		
 app.config(function($stateProvider,$urlRouterProvider){
 			
@@ -163,4 +163,4 @@ app.config(function($stateProvider,$urlRouterProvider){
 
 /***/ })
 
-},[96]);
+},[98]);

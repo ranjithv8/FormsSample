@@ -27,5 +27,8 @@
     "karma-webpack": "^2.0.3",
     "lite-server": "^2.3.0",
     "webpack": "^2.6.1"
+  },
+  "dependencies": {
+    "angular-messages": "^1.6.5"
   }
 }

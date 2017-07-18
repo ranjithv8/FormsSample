@@ -1,13 +1,20 @@
-<form name = 'thenga' ng-submit = '$ctrl.onSubmit()'>
+<form name = 'loginForm' ng-submit = '$ctrl.submit({data:$ctrl.formData})' novalidate>
 	<div>
 		<label>Username</label>
-		<input type = 'text'/>
+		<input type = 'text' name = 'username' ng-model = '$ctrl.formData.username' min-length = '4' ng-pattern = '/^[a-z]+[0-9a-z_]*$/' required/>
+		<div ng-messages = 'loginForm.username.$error' ng-if='loginForm.username.$dirty'>
+			<div ng-message = 'required' class = "form-field-error">Please enter the username</div>
+			<div ng-message = 'pattern' class = "form-field-error">Please enter valid username</div>
+		</div>
 	</div>
 	<div>
 		<label>Password</label>
-		<input type = 'password'/>
+		<input type = 'password' name = 'password' ng-model = '$ctrl.formData.password' required/>
+		<div ng-messages = 'loginForm.password.$error' ng-if='loginForm.password.$dirty'>
+			<div ng-message = 'required' class = "form-field-error">Please enter the password</div>
+		</div>
 	</div>
 	<div>
-		<button type='submit'>Submit</button>
+		<input type='submit' ng-disabled = '!loginForm.$valid' />
 	</div>
 <form>
