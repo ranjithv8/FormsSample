@@ -1,6 +1,11 @@
 var loginFormComponent = (function(){
 	angular.module("customForms").component('loginform',{
-		template: require("./loginForm.html")
+		bindings:{},
+		template: require("./loginForm.html"),
+		onSubmit: function() {
+			debugger;
+			alert("Okay")
+		}
 	});
 })();
 
